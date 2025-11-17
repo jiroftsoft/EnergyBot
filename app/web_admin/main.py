@@ -69,8 +69,16 @@ async def zarinpal_callback(
                             "<p>برای تست واقعی، یک پرداخت واقعی انجام دهید.</p>",
                     status_code=200,
                 )
+            
+            # لاگ دقیق‌تر برای عیب‌یابی
+            logger.error("Payment verification failed: Authority=%s, success=%s, payment=%s", 
+                        Authority, success, payment is not None)
+            
+            error_msg = "<h3>پرداخت توسط درگاه تأیید نشد یا لغو شد.</h3>"
+            if payment is None:
+                error_msg += "<p>⚠️ Payment record در دیتابیس یافت نشد. ممکن است ربات در local اجرا شده باشد.</p>"
             return HTMLResponse(
-                content="<h3>پرداخت توسط درگاه تأیید نشد یا لغو شد.</h3>",
+                content=error_msg,
                 status_code=200,
             )
 
