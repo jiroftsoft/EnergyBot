@@ -1,0 +1,14 @@
+aiogram>=3.4.0
+fastapi
+uvicorn[standard]
+SQLAlchemy>=2.0
+aiosqlite
+psycopg2-binary
+pydantic-settings
+python-dotenv
+httpx
+jinja2
+openai
+python-multipart
+email-validator
+loguru
