@@ -61,6 +61,14 @@ async def zarinpal_callback(
         )
 
         if not success or payment is None:
+            # اگر Authority=TEST باشد، این یک تست است
+            if Authority and Authority.upper() == "TEST":
+                return HTMLResponse(
+                    content="<h3>✅ Callback به درستی کار می‌کند!</h3>"
+                            "<p>این یک تست بود. Authority=TEST در دیتابیس وجود ندارد.</p>"
+                            "<p>برای تست واقعی، یک پرداخت واقعی انجام دهید.</p>",
+                    status_code=200,
+                )
             return HTMLResponse(
                 content="<h3>پرداخت توسط درگاه تأیید نشد یا لغو شد.</h3>",
                 status_code=200,
